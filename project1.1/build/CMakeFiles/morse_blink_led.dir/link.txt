@@ -1,0 +1,1 @@
+//duo-sdk/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-gcc --sysroot=//duo-sdk/rootfs -O3 -DNDEBUG  -lwiringx -lwiringx CMakeFiles/morse_blink_led.dir/main.c.o CMakeFiles/morse_blink_led.dir/blink.c.o CMakeFiles/morse_blink_led.dir/delay.c.o CMakeFiles/morse_blink_led.dir/morse.c.o -o morse_blink_led 

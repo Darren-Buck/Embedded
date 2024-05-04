@@ -1,0 +1,12 @@
+Build image with:
+    docker build -t <username>/static-lib-app:latest -f CMake.dockerfile .
+
+Where <username> is your dockerhub username. My dockerhub username is ejortega.
+So I build with:
+    docker build -t ejortega/static-lib-app:latest -f CMake.dockerfile .
+
+Push your image (use your username):
+    docker push <username>/static-lib-app:latest
+
+You can run the image:
+    docker run --rm <username>/static-lib-app:latest

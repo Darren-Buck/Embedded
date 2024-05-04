@@ -1,0 +1,12 @@
+Build image with:
+    docker build -t <username>/python-app:latest -f Python.dockerfile .
+
+Where <username> is your dockerhub username. My dockerhub username is ejortega.
+So I build with:
+    docker build -t ejortega/python-app:latest -f Python.dockerfile .
+
+Push your image (use your username):
+    docker push <username>/python-app:latest
+
+You can run the image:
+    docker run --rm <username>/python-app:latest

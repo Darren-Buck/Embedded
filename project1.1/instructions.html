@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>instructions</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="morse-code-translator">Morse Code Translator</h1>
+<h2 id="introduction">Introduction</h2>
+<p>This project involves creating a Morse code translator in C that controls an LED on the Milk-V Duo to blink Morse code representations of text inputs. The objective is to blend software development with hands-on hardware interaction, focusing on embedded systems programming, C language, and unit testing using Unity.</p>
+<h2 id="setup-instructions">Setup Instructions</h2>
+<ol type="1">
+<li>Set up the Milk-V Duo embedded device.
+<ol type="1">
+<li>Image: https://github.com/milkv-duo/duo-buildroot-sdk/releases/download/Duo-V1.0.9/milkv-duo-v1.0.9-2024-0226.img.zip</li>
+<li>After burning the image to the sdcard make sure to disable the built-in blink LED script. <code>ln -sf /mnt/system/usb-host.sh /mnt/system/usb.sh sync</code></li>
+</ol></li>
+<li>Install Unity testing framework.</li>
+</ol>
+<h2 id="teams">Teams</h2>
+<p>You are allowed to pair up with another person or go solo. If you are teaming up with another person, you must email your partner.</p>
+<h2 id="morse-code-timing">Morse Code Timing</h2>
+<p>Morse code transmission is based on a standardized timing sequence which determines the length of each symbol (dot and dash) and the pauses between them. The timing is typically based on a basic unit of time, often referred to as a “dit” for the dot.</p>
+<ol type="1">
+<li><strong>Dot (Dit)</strong>: The duration of a dot is 1 time unit.</li>
+<li><strong>Dash (Dah)</strong>: A dash is equal to 3 time units.</li>
+<li><strong>Space Between Parts of the Same Letter</strong>: The space between the dots and dashes within a letter is 1 time unit (the same duration as a dot).</li>
+<li><strong>Space Between Letters</strong>: The space between letters is 3 time units (the same duration as a dash).</li>
+<li><strong>Space Between Words</strong>: The space between words is 7 time units.</li>
+</ol>
+<p>For example, in the transmission of the word “SOS”:</p>
+<ul>
+<li>“S”:
+<ul>
+<li>Dot (1 unit)</li>
+<li>Space (1 unit)</li>
+<li>Dot (1 unit)</li>
+<li>Space (1 unit)</li>
+<li>Dot (1 unit)</li>
+</ul></li>
+<li>Space between “S” and “O” (3 units)</li>
+<li>“O”:
+<ul>
+<li>Dash (3 units)</li>
+<li>Space (1 unit)</li>
+<li>Dash (3 units)</li>
+<li>Space (1 unit)</li>
+<li>Dash (3 units)</li>
+</ul></li>
+<li>Space between “O” and “S” (3 units)</li>
+<li>“S”:
+<ul>
+<li>Dot (1 unit)</li>
+<li>Space (1 unit)</li>
+<li>Dot (1 unit)</li>
+<li>Space (1 unit)</li>
+<li>Dot (1 unit)</li>
+</ul></li>
+</ul>
+<p>This timing must be accurately implemented in the software controlling the LED on the Duo device to ensure proper Morse code transmission.</p>
+<h2 id="sample-code">Sample Code</h2>
+<h3 id="morse-code-translator-function">Morse Code Translator Function</h3>
+<p>This is not finished!, it doesn’t handle capital letters</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="co">// Function to convert a character to Morse code</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="dt">const</span> <span class="dt">char</span> *char_to_morse(<span class="dt">char</span> c)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>{</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>    <span class="co">// Define Morse code for each alphabet and digit</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>    <span class="dt">static</span> <span class="dt">const</span> <span class="dt">char</span> *morseCode[<span class="dv">36</span>] = {<span class="st">&quot;.-&quot;</span>, <span class="st">&quot;-...&quot;</span>, <span class="st">&quot;-.-.&quot;</span>, <span class="st">&quot;-..&quot;</span>, <span class="st">&quot;.&quot;</span>, <span class="st">&quot;..-.&quot;</span>, <span class="st">&quot;--.&quot;</span>, <span class="st">&quot;....&quot;</span>, <span class="st">&quot;..&quot;</span>, <span class="st">&quot;.---&quot;</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>                                        <span class="st">&quot;-.-&quot;</span>, <span class="st">&quot;.-..&quot;</span>, <span class="st">&quot;--&quot;</span>, <span class="st">&quot;-.&quot;</span>, <span class="st">&quot;---&quot;</span>, <span class="st">&quot;.--.&quot;</span>, <span class="st">&quot;--.-&quot;</span>, <span class="st">&quot;.-.&quot;</span>, <span class="st">&quot;...&quot;</span>, <span class="st">&quot;-&quot;</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>                                        <span class="st">&quot;..-&quot;</span>, <span class="st">&quot;...-&quot;</span>, <span class="st">&quot;.--&quot;</span>, <span class="st">&quot;-..-&quot;</span>, <span class="st">&quot;-.--&quot;</span>, <span class="st">&quot;--..&quot;</span>, <span class="st">&quot;-----&quot;</span>, <span class="st">&quot;.----&quot;</span>, <span class="st">&quot;..---&quot;</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a>                                        <span class="st">&quot;...--&quot;</span>, <span class="st">&quot;....-&quot;</span>, <span class="st">&quot;.....&quot;</span>, <span class="st">&quot;-....&quot;</span>, <span class="st">&quot;--...&quot;</span>, <span class="st">&quot;---..&quot;</span>, <span class="st">&quot;----.&quot;</span>};</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a>    <span class="cf">if</span> (c &gt;= <span class="ch">&#39;a&#39;</span> &amp;&amp; c &lt;= <span class="ch">&#39;z&#39;</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a>    {</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a>        <span class="cf">return</span> morseCode[c - <span class="ch">&#39;a&#39;</span>];</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a>    }</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a>    <span class="cf">else</span> <span class="cf">if</span> (c &gt;= <span class="ch">&#39;0&#39;</span> &amp;&amp; c &lt;= <span class="ch">&#39;9&#39;</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a>    {</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a>        <span class="cf">return</span> morseCode[c - <span class="ch">&#39;0&#39;</span> + <span class="dv">26</span>];</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a>    }</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a>    <span class="cf">else</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a>    {</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true"></a>        <span class="cf">return</span> <span class="st">&quot;&quot;</span>; <span class="co">// Return empty string for other characters</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true"></a>    }</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true"></a>}</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true"></a><span class="co">// Function to convert a word to Morse code</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true"></a><span class="co">// Use the delimiter / for any spaces between words</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true"></a><span class="dt">void</span> translate_to_morse(<span class="dt">const</span> <span class="dt">char</span> *text, <span class="dt">char</span> *morseOutput, <span class="dt">int</span> morseOutputSize)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true"></a>{</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true"></a>    <span class="co">// Loop through the text to convert each</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true"></a>    <span class="co">// charactor to morse code.</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true"></a>    <span class="co">// char_to_morse function is provided above but may not</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true"></a>    <span class="co">// handle all cases.</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true"></a>}</span></code></pre></div>
+<h3 id="main-function">Main Function</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;morse.h&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="pp">#define BUFSIZE 100</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="dt">int</span> main()</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>{</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>    <span class="dt">char</span> text[] = <span class="st">&quot;hello&quot;</span>;</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>    <span class="dt">char</span> morseOutput[BUFSIZE] = <span class="st">&quot;&quot;</span>;</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a>    <span class="co">// Fill in the code for `translate_to_morse`</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a>    translate_to_morse(text, morseOutput, BUFSIZE - <span class="dv">1</span>);</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a>    printf(<span class="st">&quot;Morse Code: %s</span><span class="sc">\n</span><span class="st">&quot;</span>, morseOutput);</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true"></a>    <span class="co">// Passe `morseOutput` to the morse_blink_led function</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true"></a>    <span class="co">// Update the morse_blink_led to blink accordingly</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true"></a>    morse_blink_led(morseOutput);</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true"></a>}</span></code></pre></div>
+<h2 id="testing-guidelines">Testing Guidelines</h2>
+<ol type="1">
+<li><strong>Unit Testing with Unity</strong>:
+<ul>
+<li>Write unit tests for the <code>char_to_morse</code> and <code>translate_to_morse</code> functions.</li>
+<li>Ensure all characters are correctly translated to Morse code.</li>
+<li>Write tests for <code>test_AlphabeticInput</code>, <code>test_NumericInput</code>, <code>test_MixedAlphanumericInput</code>, <code>test_NonRepresentableBinaryData</code>, <code>test_MorseTiming</code>, <code>test_MixedCase</code></li>
+</ul></li>
+<li><strong>Hardware Testing</strong>:
+<ul>
+<li>Test the LED blinking on the Duo device to match the Morse code output.</li>
+<li>Verify the timing and sequence of the LED blinks.</li>
+</ul></li>
+</ol>
+<h2 id="sample-test-code">Sample Test Code</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;unity.h&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;delay.h&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;morse.h&quot;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a><span class="kw">extern</span> <span class="dt">int</span> mock_delay_called;</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a><span class="kw">extern</span> <span class="dt">int</span> mock_delay_duration;</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a><span class="co">// if needed</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a><span class="dt">void</span> setUp(<span class="dt">void</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a>{</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true"></a>    <span class="co">// Set up any required structures or variables before each test</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a>}</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true"></a><span class="co">// if needed</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true"></a><span class="dt">void</span> tearDown(<span class="dt">void</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true"></a>{</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true"></a>    <span class="co">// Clean up after each test</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true"></a>}</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true"></a><span class="co">// Test function for normal alphabetic input</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true"></a><span class="dt">void</span> test_AlphabeticInput(<span class="dt">void</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true"></a>{</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true"></a>    <span class="dt">char</span> output[<span class="dv">100</span>];</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true"></a>    translate_to_morse(<span class="st">&quot;hello&quot;</span>, output, <span class="dv">99</span>);</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true"></a>    <span class="co">// hello</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true"></a>    <span class="dt">char</span> *expected = <span class="st">&quot;.... . .-.. .-.. ---&quot;</span>;</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true"></a>    TEST_ASSERT_EQUAL_STRING(expected, output);</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true"></a>}</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true"></a><span class="co">// Test function for numeric input</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true"></a><span class="dt">void</span> test_NumericInput(<span class="dt">void</span>)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true"></a>{</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true"></a>    <span class="dt">char</span> output[<span class="dv">100</span>];</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true"></a>    <span class="co">// Add test code for numeric input such as &quot;123&quot;</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true"></a>    translate_to_morse(<span class="st">&quot;123&quot;</span>, output, <span class="dv">99</span>);</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true"></a>    <span class="co">// 123</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true"></a>    <span class="dt">char</span> *expected = <span class="st">&quot;.---- ..--- ...--&quot;</span>;</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true"></a></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true"></a>    TEST_ASSERT_EQUAL_STRING(expected, output);</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true"></a>}</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true"></a></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true"></a><span class="co">// Test function for mixed alphanumeric input</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true"></a><span class="dt">void</span> test_MixedAlphanumericInput(<span class="dt">void</span>)</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true"></a>{</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true"></a>    <span class="dt">char</span> output[<span class="dv">100</span>];</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true"></a>    <span class="co">// Add test code for numeric input such as &quot;abc123&quot;</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true"></a>    translate_to_morse(<span class="st">&quot;abc123&quot;</span>, output, <span class="dv">99</span>);</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true"></a></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true"></a>    <span class="co">// abc123</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true"></a>    <span class="dt">char</span> *expected = <span class="st">&quot;.- -... -.-. .---- ..--- ...--&quot;</span>;</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true"></a></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true"></a>    TEST_ASSERT_EQUAL_STRING(expected, output);</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true"></a>}</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true"></a></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true"></a><span class="co">// Test function for mixed case input</span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true"></a><span class="dt">void</span> test_MixedCaseAlphanumericInput(<span class="dt">void</span>)</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true"></a>{</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true"></a>    <span class="dt">char</span> output[<span class="dv">100</span>];</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true"></a>    <span class="co">// Add test code for numeric input such as &quot;AbC123&quot;</span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true"></a>    translate_to_morse(<span class="st">&quot;AbC123&quot;</span>, output, <span class="dv">99</span>);</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true"></a></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true"></a>    <span class="co">// AbC123</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true"></a>    <span class="dt">char</span> *expected = <span class="st">&quot;.- -... -.-. .---- ..--- ...--&quot;</span>;</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true"></a></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true"></a>    TEST_ASSERT_EQUAL_STRING(expected, output);</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true"></a>}</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true"></a></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true"></a><span class="co">// Test function for words with spaces</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true"></a><span class="dt">void</span> test_CanHandleSpaces(<span class="dt">void</span>)</span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true"></a>{</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true"></a>    <span class="dt">char</span> output[<span class="dv">100</span>];</span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true"></a>    <span class="co">// Add test code for numeric input such as &quot;AbC123&quot;</span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true"></a>    translate_to_morse(<span class="st">&quot;Hello World&quot;</span>, output, <span class="dv">99</span>);</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true"></a></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true"></a>    <span class="co">// Hello World</span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true"></a>    <span class="dt">char</span> *expected = <span class="st">&quot;.... . .-.. .-.. --- / .-- --- .-. .-.. -..&quot;</span>;</span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true"></a></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true"></a>    TEST_ASSERT_EQUAL_STRING(expected, output);</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true"></a>}</span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true"></a></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true"></a><span class="co">// Test function for non-representable binary data</span></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true"></a><span class="dt">void</span> test_NonRepresentableBinaryData(<span class="dt">void</span>)</span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true"></a>{</span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true"></a>    <span class="co">// Nothing to do here, just showing example</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true"></a>    <span class="dt">char</span> output[<span class="dv">100</span>];</span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true"></a>    <span class="dt">char</span> binaryData[] = {<span class="bn">0x00</span>, <span class="bn">0xFF</span>, <span class="bn">0x55</span>, <span class="bn">0x7F</span>}; <span class="co">// Example binary data</span></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true"></a>    translate_to_morse(binaryData, output, <span class="dv">99</span>);</span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true"></a>    <span class="co">// Since Morse code is not defined for arbitrary binary data, we need to define expected behavior.</span></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true"></a>    <span class="co">// For example, if non-representable characters are translated as empty strings:</span></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true"></a>    TEST_ASSERT_EQUAL_STRING(<span class="st">&quot;&quot;</span>, output);</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true"></a>}</span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true"></a></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true"></a><span class="pp">#if !defined(RELEASE) &amp;&amp; !defined(DEBUG)</span></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true"></a><span class="co">// Test that we can blink an LED</span></span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true"></a><span class="dt">void</span> test_MorseTiming(<span class="dt">void</span>)</span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true"></a>{</span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true"></a>    <span class="co">// Initialize mock function variables</span></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true"></a>    mock_initialize();</span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true"></a></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true"></a>    <span class="co">// Translate &quot;SOS&quot; to Morse code</span></span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true"></a>    <span class="dt">char</span> output[<span class="dv">150</span>];</span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true"></a>    translate_to_morse(<span class="st">&quot;SOS&quot;</span>, output, <span class="kw">sizeof</span>(output) - <span class="dv">1</span>);</span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true"></a></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true"></a>    <span class="co">// Blink LED according to Morse code</span></span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true"></a>    morse_blink_led(output);</span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true"></a></span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true"></a>    <span class="co">// printf(&quot;mock_delay_called: %d\n&quot;, mock_delay_called);</span></span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true"></a>    <span class="co">// printf(&quot;mock_delay_duration: %d\n&quot;, mock_delay_duration);</span></span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true"></a></span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true"></a>    <span class="co">// Expected values</span></span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true"></a>    <span class="dt">int</span> expected_delay_calls = <span class="dv">17</span>;</span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true"></a>    <span class="dt">int</span> expected_delay_duration = <span class="dv">27</span>;</span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true"></a></span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true"></a>    <span class="co">// Assert the number of delay calls</span></span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true"></a>    TEST_ASSERT_EQUAL(expected_delay_calls, mock_delay_called);</span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true"></a></span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true"></a>    <span class="co">// Assert the total duration of delays</span></span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true"></a>    TEST_ASSERT_EQUAL(expected_delay_duration, mock_delay_duration);</span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true"></a>}</span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true"></a><span class="pp">#endif</span></span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true"></a></span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true"></a><span class="dt">int</span> main(<span class="dt">void</span>)</span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true"></a>{</span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true"></a>    UNITY_BEGIN();</span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true"></a>    RUN_TEST(test_AlphabeticInput);</span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true"></a>    RUN_TEST(test_NumericInput);</span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true"></a>    RUN_TEST(test_MixedAlphanumericInput);</span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true"></a>    RUN_TEST(test_CanHandleSpaces);</span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true"></a>    RUN_TEST(test_MixedCaseAlphanumericInput);</span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true"></a>    RUN_TEST(test_NonRepresentableBinaryData);</span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true"></a></span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true"></a><span class="pp">#if !defined(RELEASE) &amp;&amp; !defined(DEBUG)</span></span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true"></a>    RUN_TEST(test_MorseTiming);</span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true"></a><span class="pp">#endif</span></span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true"></a></span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true"></a>    <span class="cf">return</span> UNITY_END();</span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true"></a>}</span></code></pre></div>
+<h2 id="documentation-what-you-turn-in">Documentation (What you turn in)</h2>
+<ul>
+<li>Document your code thoroughly.</li>
+<li>Include comments to explain the logic and flow of the program.</li>
+<li>Write a brief summary of how your code works and any challenges you faced.</li>
+<li>Include all source/header files (all the completed stub code)</li>
+</ul>
+<h2 id="testing-on-the-milkv-duo">TESTING on the milkv duo</h2>
+<p>You can test this on the duo, by default it compiles only the test file. This will compile a <code>test</code> binary. Run <code>./test</code> and you will see the success/fail output. Complete the empty functions so the unit tests pass.</p>
+<ol type="1">
+<li>Configure cmake
+<ol type="1">
+<li><code>docker run --rm -v $PWD:/app duo-sdk bash -c "mkdir build &amp;&amp; cd build &amp;&amp; cmake .."</code></li>
+</ol></li>
+<li>Compile
+<ol type="1">
+<li><code>docker run --rm -v $PWD:/app duo-sdk bash -c "cd build &amp;&amp; make</code></li>
+</ol></li>
+<li>Push to the <code>test</code> file to the duo
+<ol type="1">
+<li><code>scp build/test root@192.168.42.1:/root/</code></li>
+</ol></li>
+<li>Login to the duo <code>ssh root@192.168.42.1</code>
+<ol type="1">
+<li>Make the file executable: <code>chmod +x test</code></li>
+<li>Run the test: <code>./test</code></li>
+</ol></li>
+</ol>
+<p>Note: if you have <code>build</code> folder exists errors: <code>sudo rm -rf build</code> to delete it.</p>
+<h2 id="running-on-the-milkv">Running on the milkv</h2>
+<p>Use your cross-compiler toolchain file as before. However you may need a slightly modifed toolchain file if you’re using <code>wiringx</code> and cmake.</p>
+<p>The steps are typically: (Notice the <code>Release</code> for build type. You can change to <code>Debug</code> if you need to use gdb)</p>
+<ol type="1">
+<li>Configure cmake
+<ol type="1">
+<li><code>docker run --rm -v $PWD:/app duo-sdk bash -c "mkdir build &amp;&amp; cd build &amp;&amp; cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=/app/milkv_duo.cmake .."</code></li>
+</ol></li>
+<li>Compile
+<ol type="1">
+<li><code>docker run --rm -v $PWD:/app duo-sdk bash -c "cd build &amp;&amp; make</code></li>
+</ol></li>
+<li>Push to the <code>morse_blink_led</code> file to the duo
+<ol type="1">
+<li><code>scp build/test root@192.168.42.1:/root/</code></li>
+</ol></li>
+<li>Login to the duo <code>ssh root@192.168.42.1</code>
+<ol type="1">
+<li>Make the file executable: <code>chmod +x morse_blink_led</code></li>
+<li>Run the test: <code>./morse_blink_led</code></li>
+</ol></li>
+</ol>
+<h2 id="new-toolchain-file-iff-using-wiringx-and-cmake">New Toolchain file IFF using wiringx and cmake</h2>
+<p>If you’re having linking issues and you’re using wiringx and cmake. Use this file instead as it correctly links the wiringx library.</p>
+<p>milkv_duo.cmake</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cmake"><code class="sourceCode cmake"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">set</span>(<span class="dv">CMAKE_SYSTEM_NAME</span> Linux)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="kw">set</span>(<span class="dv">CMAKE_SYSTEM_PROCESSOR</span> riscv)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a><span class="kw">set</span>(TOOLCHAIN_PREFIX <span class="fl">$ENV{TOOLCHAIN_PREFIX}</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a><span class="kw">set</span>(SYSROOT <span class="fl">$ENV{SYSROOT}</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a><span class="kw">set</span>(<span class="dv">CMAKE_SYSROOT</span> <span class="dv">${</span>SYSROOT<span class="dv">}</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a><span class="kw">set</span>(<span class="dv">CMAKE_C_COMPILER</span> <span class="st">&quot;</span><span class="dv">${</span>TOOLCHAIN_PREFIX<span class="dv">}</span><span class="st">gcc&quot;</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a><span class="kw">set</span>(<span class="dv">CMAKE_CXX_COMPILER</span> <span class="st">&quot;</span><span class="dv">${</span>TOOLCHAIN_PREFIX<span class="dv">}</span><span class="st">g++&quot;</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a><span class="kw">set</span>(<span class="dv">CMAKE_C_FLAGS</span>  <span class="st">&quot;</span><span class="dv">${CMAKE_C_FLAGS}</span><span class="st">&quot;</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true"></a><span class="kw">set</span>(<span class="dv">CMAKE_CXX_FLAGS</span> <span class="st">&quot;</span><span class="dv">${CMAKE_C_FLAGS}</span><span class="st">&quot;</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true"></a><span class="kw">set</span>(<span class="dv">CMAKE_EXE_LINKER_FLAGS</span> <span class="st">&quot;</span><span class="dv">${CMAKE_EXE_LINKER_FLAGS}</span><span class="st"> -lwiringx&quot;</span>)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true"></a><span class="kw">set</span>(<span class="dv">CMAKE_SHARED_LINKER_FLAGS</span> <span class="st">&quot;</span><span class="dv">${CMAKE_SHARED_LINKER_FLAGS}</span><span class="st"> -lwiringx&quot;</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true"></a><span class="kw">set</span>(<span class="dv">CMAKE_MODULE_LINKER_FLAGS</span> <span class="st">&quot;</span><span class="dv">${CMAKE_MODULE_LINKER_FLAGS}</span><span class="st"> -lwiringx&quot;</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true"></a><span class="kw">set</span>(<span class="dv">CMAKE_FIND_ROOT_PATH_MODE_PROGRAM</span> NEVER)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true"></a><span class="kw">set</span>(<span class="dv">CMAKE_FIND_ROOT_PATH_MODE_LIBRARY</span> ONLY)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true"></a><span class="kw">set</span>(<span class="dv">CMAKE_FIND_ROOT_PATH_MODE_INCLUDE</span> ONLY)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true"></a><span class="kw">set</span>(<span class="dv">CMAKE_FIND_ROOT_PATH_MODE_PACKAGE</span> ONLY)</span></code></pre></div>
+<p><strong>NOTE: if you get a <code>not found</code> error when running the binary. Run this command on the duo:</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="fu">ln</span> -sf /lib/ld-musl-riscv64v0p7_xthead.so.1 /lib/ld-musl-riscv64xthead.so.1</span></code></pre></div>
+<h2 id="troubleshooting-builds">Troubleshooting builds</h2>
+<p>CMake doens’t always like configuration changes, you might have to delete the <code>build</code> dir and run the appropriate cmake command again.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="fu">sudo</span> rm -rf build</span></code></pre></div>
+</body>
+</html>

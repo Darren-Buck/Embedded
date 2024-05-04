@@ -1,0 +1,12 @@
+Build image with:
+    docker build -t <username>/makefile-app:latest -f Makefile.dockerfile .
+
+Where <username> is your dockerhub username. My dockerhub username is ejortega.
+So I build with:
+    docker build -t ejortega/makefile-app:latest -f Makefile.dockerfile .
+
+Push your image (use your username):
+    docker push <username>/makefile-app:latest
+
+You can run the image:
+    docker run --rm <username>/makefile-app:latest

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>BMP280_Sensor_Code</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="bmp280-sensor-code-for-i2c-interface">BMP280 Sensor Code for I2C Interface</h1>
+<p>This is the last required assignment! I’ll have one more that’s optional/extra credit.</p>
+<p>The BMP280 is a digital barometric pressure sensor produced by Bosch Sensortec. This sensor is designed for precision and flexibility, making it suitable for a wide range of applications, particularly mobile applications like weather forecasting, indoor navigation, fitness tracking, and home automation. Here are the key features of the BMP280. Notice it supports I2C and SPI interfaces. However we’ll just use I2C.</p>
+<p>You can find the example code at: https://github.com/milkv-duo/duo-examples/tree/main/i2c/bmp280_i2c</p>
+<p>This assigment is similar to the SSD1306 assignment. The code is provided but it’s in one file and not ideal to be used with other code in it’s current format.</p>
+<p>You will have 3 files: <code>main.c</code> <code>bmp280_i2c.c</code> <code>bmp280_i2c.h</code></p>
+<h2 id="bmp280_i2c.h"><code>bmp280_i2c.h</code></h2>
+<p>This header is ready to except you might have to adjust the <code>I2C_DEV</code> if you’re using a different pin.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="pp">#ifndef BMP280_I2C_H</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="pp">#define BMP280_I2C_H</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&lt;stdint.h&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&lt;unistd.h&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="co">// Adjust if necessary</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="pp">#define I2C_DEV &quot;/dev/i2c-1&quot;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a><span class="pp">#define I2C_ADDR 0x76</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="co">// Hardware registers</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a><span class="pp">#define REG_CONFIG 0xF5</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a><span class="pp">#define REG_CTRL_MEAS 0xF4</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a><span class="pp">#define REG_RESET 0xE0</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a><span class="pp">#define REG_TEMP_XLSB 0xFC</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a><span class="pp">#define REG_TEMP_LSB 0xFB</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a><span class="pp">#define REG_TEMP_MSB 0xFA</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a><span class="pp">#define REG_PRESSURE_XLSB 0xF9</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a><span class="pp">#define REG_PRESSURE_LSB 0xF8</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a><span class="pp">#define REG_PRESSURE_MSB 0xF7</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true"></a><span class="co">// Calibration registers</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true"></a><span class="pp">#define REG_DIG_T1 0x88</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true"></a><span class="pp">#define REG_DIG_T2 0x8A</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true"></a><span class="pp">#define REG_DIG_T3 0x8C</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true"></a><span class="pp">#define REG_DIG_P1 0x8E</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true"></a><span class="pp">#define REG_DIG_P2 0x90</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true"></a><span class="pp">#define REG_DIG_P3 0x92</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true"></a><span class="pp">#define REG_DIG_P4 0x94</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true"></a><span class="pp">#define REG_DIG_P5 0x96</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true"></a><span class="pp">#define REG_DIG_P6 0x98</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true"></a><span class="pp">#define REG_DIG_P7 0x9A</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true"></a><span class="pp">#define REG_DIG_P8 0x9C</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true"></a><span class="pp">#define REG_DIG_P9 0x9E</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true"></a><span class="kw">struct</span> bmp280_calib_param {</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true"></a>    <span class="dt">uint16_t</span> dig_t1;</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true"></a>    <span class="dt">int16_t</span> dig_t2;</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true"></a>    <span class="dt">int16_t</span> dig_t3;</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true"></a>    <span class="dt">uint16_t</span> dig_p1;</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true"></a>    <span class="dt">int16_t</span> dig_p2;</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true"></a>    <span class="dt">int16_t</span> dig_p3;</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true"></a>    <span class="dt">int16_t</span> dig_p4;</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true"></a>    <span class="dt">int16_t</span> dig_p5;</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true"></a>    <span class="dt">int16_t</span> dig_p6;</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true"></a>    <span class="dt">int16_t</span> dig_p7;</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true"></a>    <span class="dt">int16_t</span> dig_p8;</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true"></a>    <span class="dt">int16_t</span> dig_p9;</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true"></a>};</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true"></a><span class="dt">void</span> bmp280_read_raw(<span class="dt">int</span> fd, <span class="dt">int32_t</span> *temp, <span class="dt">int32_t</span> *pressure);</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true"></a><span class="dt">void</span> bmp280_init(<span class="dt">int</span> fd);</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true"></a><span class="dt">void</span> bmp280_get_calib_params(<span class="dt">int</span> fd, <span class="kw">struct</span> bmp280_calib_param *params);</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true"></a><span class="dt">int32_t</span> bmp280_convert_temp(<span class="dt">int32_t</span> temp, <span class="kw">struct</span> bmp280_calib_param *params);</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true"></a><span class="dt">int32_t</span> bmp280_convert_pressure(<span class="dt">int32_t</span> pressure, <span class="dt">int32_t</span> temp, <span class="kw">struct</span> bmp280_calib_param *params);</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true"></a><span class="kw">struct</span> bmp280_i2c {</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true"></a>    <span class="dt">double</span> temperature;</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true"></a>    <span class="dt">double</span> pressure;</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true"></a>};</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true"></a><span class="dt">void</span> wiringx_init();</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true"></a><span class="kw">struct</span> bmp280_i2c read_temp_pressure();</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true"></a><span class="pp">#endif </span><span class="co">// BMP280_I2C_H</span></span></code></pre></div>
+<h2 id="bmp280_i2c.c"><code>bmp280_i2c.c</code></h2>
+<p>The sample code has a main function that does some intialization of the wiringX library. Essentially up until the <code>usleep(250000)</code> function call. Take <code>int fd_i2c;</code> and place it as a global variable (it’s currently a local variable) and make it static. <code>static int fd_i2c;</code> Do the same with <code>struct bmp280_calib_param params;</code> Move it into global space and make it static <code>static struct bmp280_calib_param params;</code> This will be your <code>wiringx_init</code> function (up until the usleep).</p>
+<p>The remaining code from <code>main</code> can be made into it’s own function <code>struct bmp280_i2c read_temp_pressure()</code></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>    <span class="dt">int32_t</span> raw_temperature;</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>    <span class="dt">int32_t</span> raw_pressure;</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>    <span class="cf">while</span> (<span class="dv">1</span>) {</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>        bmp280_read_raw(fd_i2c, &amp;raw_temperature, &amp;raw_pressure);</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>        <span class="dt">int32_t</span> temperature = bmp280_convert_temp(raw_temperature, &amp;params);</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>        <span class="dt">int32_t</span> pressure = bmp280_convert_pressure(raw_pressure, raw_temperature, &amp;params);</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>        printf(<span class="st">&quot;Temp. = %.2f C</span><span class="sc">\n</span><span class="st">&quot;</span>, temperature / <span class="fl">100.</span><span class="bu">f</span>);</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>        printf(<span class="st">&quot;Pressure = %.3f kPa</span><span class="sc">\n</span><span class="st">&quot;</span>, pressure / <span class="fl">1000.</span><span class="bu">f</span>);</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>        <span class="co">// poll every 1s</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>        sleep(<span class="dv">1</span>);</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a>    }</span></code></pre></div>
+<p>Start by removing the <code>while</code> loop and <code>sleep</code> and save the results to a <code>struct bmp280_i2c</code> and return. Pay attention to <code>struct bmp280_i2c</code>, the types are doubles, so you need to divide temp by 100 and pressure by 1000 before returning.</p>
+<p>Lastly, all the functions before main can be copied to <code>bmp280_i2c.c</code>. Don’t forget to include your <code>bmp280_i2c.c</code> header.</p>
+<h2 id="main.c"><code>main.c</code></h2>
+<p>Your main.c will be very minimal (might need additional headers for printf and sleep).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;bmp280_i2c.h&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="dt">int</span> main() {</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>    wiringx_init();</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>    <span class="cf">while</span> (<span class="dv">1</span>) {</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>        <span class="kw">struct</span> bmp280_i2c result = read_temp_pressure();</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a>        printf(<span class="st">&quot;Temperature: %.2f°C, Pressure: %.3fkPa</span><span class="sc">\n</span><span class="st">&quot;</span>, result.temperature, result.pressure);</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a>        sleep(<span class="dv">1</span>);</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a>    }</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true"></a>}</span></code></pre></div>
+<h2 id="deliverables">Deliverables</h2>
+<ul>
+<li>CMakeLists.txt
+<ul>
+<li>This is similar to the ssd1306 assignment. You’ll have a <code>add_library</code> for the <code>bmp280</code> code, and a <code>add_executable</code> for <code>main.c</code>, plus <code>target_link_libraries</code> to link the library to the executable.</li>
+</ul></li>
+<li>Source code
+<ul>
+<li><code>bmp280_i2c.c</code></li>
+<li><code>bmp280_i2c.h</code></li>
+<li><code>main.c</code></li>
+</ul></li>
+<li>Extra Credit
+<ul>
+<li>Screenshot of your OLED displaying temp and pressure</li>
+<li>You’ll need to include some code from your ssd1306 library.</li>
+</ul></li>
+</ul>
+<p>NOTE: Since we’re using wiringx library, use the <code>milkv_duo.cmake</code> file from the morse code project.</p>
+</body>
+</html>
