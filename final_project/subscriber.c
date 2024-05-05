@@ -41,9 +41,9 @@ void message_callback(struct mosquitto *mosq, void *userdata, const struct mosqu
                     float temperature = bmp280_get_temperature();
                     char temperature_string[20];
                     snprintf(temperature_string, sizeof(temperature_string), "%.2f C", temperature);
-                    ssd1306_oled_write_string(SSD1306_FONT_SMALL, "Temperature:");
+                    ssd1306_oled_write_string(0, "Temperature:");
                     ssd1306_oled_set_XY(0, 2);
-                    ssd1306_oled_write_string(SSD1306_FONT_SMALL, temperature_string);
+                    ssd1306_oled_write_string(0, temperature_string);
                 }
                 else if (strcmp(task->valuestring, "get_pressure") == 0)
                 {
@@ -51,9 +51,9 @@ void message_callback(struct mosquitto *mosq, void *userdata, const struct mosqu
                     float pressure = bmp280_get_pressure();
                     char pressure_string[20];
                     snprintf(pressure_string, sizeof(pressure_string), "%.2f Pa", pressure);
-                    ssd1306_oled_write_string(SSD1306_FONT_SMALL, "Pressure:");
+                    ssd1306_oled_write_string(0, "Pressure:");
                     ssd1306_oled_set_XY(0, 2);
-                    ssd1306_oled_write_string(SSD1306_FONT_SMALL, pressure_string);
+                    ssd1306_oled_write_string(0, pressure_string);
                 }
                 else if (strcmp(task->valuestring, "get_temperature_pressure") == 0)
                 {
@@ -64,13 +64,13 @@ void message_callback(struct mosquitto *mosq, void *userdata, const struct mosqu
                     char pressure_string[20];
                     snprintf(temperature_string, sizeof(temperature_string), "Temp: %.2f C", temperature);
                     snprintf(pressure_string, sizeof(pressure_string), "Press: %.2f Pa", pressure);
-                    ssd1306_oled_write_string(SSD1306_FONT_SMALL, "Temperature:");
+                    ssd1306_oled_write_string(0, "Temperature:");
                     ssd1306_oled_set_XY(0, 2);
-                    ssd1306_oled_write_string(SSD1306_FONT_SMALL, temperature_string);
+                    ssd1306_oled_write_string(0, temperature_string);
                     ssd1306_oled_set_XY(0, 4);
-                    ssd1306_oled_write_string(SSD1306_FONT_SMALL, "Pressure:");
+                    ssd1306_oled_write_string(0, "Pressure:");
                     ssd1306_oled_set_XY(0, 6);
-                    ssd1306_oled_write_string(SSD1306_FONT_SMALL, pressure_string);
+                    ssd1306_oled_write_string(0, pressure_string);
                 }
                 // Add more task handling as needed
             }
@@ -82,7 +82,7 @@ void message_callback(struct mosquitto *mosq, void *userdata, const struct mosqu
             if (cJSON_IsString(string_msg) && (string_msg->valuestring != NULL))
             {
                 // Handle string message
-                ssd1306_oled_write_string(SSD1306_FONT_SMALL, string_msg->valuestring);
+                ssd1306_oled_write_string(0, string_msg->valuestring);
             }
 
 
@@ -94,7 +94,7 @@ void message_callback(struct mosquitto *mosq, void *userdata, const struct mosqu
                 // Handle integer message
                 char int_msg_string[20];
                 snprintf(int_msg_string, sizeof(int_msg_string), "%d", int_msg->valueint);
-                ssd1306_oled_write_string(SSD1306_FONT_SMALL, int_msg_string);
+                ssd1306_oled_write_string(0, int_msg_string);
             }
 
 
@@ -125,12 +125,8 @@ int main(int argc, char *argv[])
 {
     wiringx_init();
 
-    // Initialize OLED
-    if (_i2c_init(I2C_BUS, OLED_ADDR) != 0)
-    {
-        printf("Failed to initialize OLED.\n");
-        return 1;
-    }
+    ssd1306_init(0);
+    ssd1306_oled_default_config(64, 128);
 
 
     struct mosquitto *mosq;
@@ -173,3 +169,12 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+
+
+// Initialize ssd1306 library (do this once in main) 
+// The 0 here relates to the i2c bus you're using, use another number if needed ssd1306_init(0);
+// This sets the screen (do this once in main) ssd1306_oled_default_config(64, 128);
+ // These should be done before any printing ssd1306_oled_clear_screen(); ssd1306_oled_set_XY(0, 0); 
+ // setup a buffer for writing char msg[250] = {0};
+ // example using the temp sensor struct bmp280_i2c tmp = read_temp_pressure(); sprintf(msg, "Temp: %f", tmp.temperature);
+ // writing to the string (0 is the font size, keep it at 0) ssd1306_oled_write_string(0, msg);
