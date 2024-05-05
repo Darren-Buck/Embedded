@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.22)
+project(final_project VERSION 1.0)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+# include folders
+include_directories("headers")
+include_directories("sources")
+
+
+####### Configuring xwire lib ######
+include(milkv_duo.cmake)
+##################################
+
+add_executable(final_project "sources/main.c" "sources/oled_txt.c")
+
+# Specify full paths to the libraries
+target_link_libraries(final_project "${CMAKE_SOURCE_DIR}/libs/libbmp280_i2c.a" "${CMAKE_SOURCE_DIR}/libs/libssd1306.a")
+# ${CMAKE_BINARY_DIR} to refer to the build directory
+# {CMAKE_SOURCE_DIR} variable in CMake refers to the path of the source directory, which is the directory where the main CMakeLists.txt 
+
+
