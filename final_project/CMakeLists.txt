@@ -12,7 +12,7 @@ add_library(ssd1306 STATIC sources/ssd1306.c sources/linux_i2c.c)
 add_library(bmp280 STATIC sources/bmp280_i2c.c)
 
 
-add_library(blink STATIC sources/blink.c sources/morse.c sources/delay.c sources/main_blink.c)
+add_library(blink STATIC sources/blink.c sources/morse.c sources/delay.c sources/main_blink.c sources/font.c)
 
 
 # Find cJSON library

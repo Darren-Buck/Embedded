@@ -1,2 +1,2 @@
-//duo-sdk/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-ar qc libblink.a CMakeFiles/blink.dir/sources/blink.c.o CMakeFiles/blink.dir/sources/morse.c.o CMakeFiles/blink.dir/sources/delay.c.o CMakeFiles/blink.dir/sources/main_blink.c.o
+//duo-sdk/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-ar qc libblink.a CMakeFiles/blink.dir/sources/blink.c.o CMakeFiles/blink.dir/sources/morse.c.o CMakeFiles/blink.dir/sources/delay.c.o CMakeFiles/blink.dir/sources/main_blink.c.o CMakeFiles/blink.dir/sources/font.c.o
 //duo-sdk/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-ranlib libblink.a

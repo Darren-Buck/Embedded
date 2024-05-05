@@ -125,12 +125,27 @@ CMakeFiles/blink.dir/sources/main_blink.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/blink.dir/sources/main_blink.c.s"
 	//duo-sdk/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-gcc --sysroot=//duo-sdk/rootfs $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /app/sources/main_blink.c -o CMakeFiles/blink.dir/sources/main_blink.c.s
 
+CMakeFiles/blink.dir/sources/font.c.o: CMakeFiles/blink.dir/flags.make
+CMakeFiles/blink.dir/sources/font.c.o: ../sources/font.c
+CMakeFiles/blink.dir/sources/font.c.o: CMakeFiles/blink.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/blink.dir/sources/font.c.o"
+	//duo-sdk/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-gcc --sysroot=//duo-sdk/rootfs $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/blink.dir/sources/font.c.o -MF CMakeFiles/blink.dir/sources/font.c.o.d -o CMakeFiles/blink.dir/sources/font.c.o -c /app/sources/font.c
+
+CMakeFiles/blink.dir/sources/font.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/blink.dir/sources/font.c.i"
+	//duo-sdk/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-gcc --sysroot=//duo-sdk/rootfs $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /app/sources/font.c > CMakeFiles/blink.dir/sources/font.c.i
+
+CMakeFiles/blink.dir/sources/font.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/blink.dir/sources/font.c.s"
+	//duo-sdk/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-gcc --sysroot=//duo-sdk/rootfs $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /app/sources/font.c -o CMakeFiles/blink.dir/sources/font.c.s
+
 # Object files for target blink
 blink_OBJECTS = \
 "CMakeFiles/blink.dir/sources/blink.c.o" \
 "CMakeFiles/blink.dir/sources/morse.c.o" \
 "CMakeFiles/blink.dir/sources/delay.c.o" \
-"CMakeFiles/blink.dir/sources/main_blink.c.o"
+"CMakeFiles/blink.dir/sources/main_blink.c.o" \
+"CMakeFiles/blink.dir/sources/font.c.o"
 
 # External object files for target blink
 blink_EXTERNAL_OBJECTS =
@@ -139,9 +154,10 @@ libblink.a: CMakeFiles/blink.dir/sources/blink.c.o
 libblink.a: CMakeFiles/blink.dir/sources/morse.c.o
 libblink.a: CMakeFiles/blink.dir/sources/delay.c.o
 libblink.a: CMakeFiles/blink.dir/sources/main_blink.c.o
+libblink.a: CMakeFiles/blink.dir/sources/font.c.o
 libblink.a: CMakeFiles/blink.dir/build.make
 libblink.a: CMakeFiles/blink.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C static library libblink.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking C static library libblink.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/blink.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/blink.dir/link.txt --verbose=$(VERBOSE)
 

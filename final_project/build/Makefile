@@ -286,6 +286,30 @@ sources/delay.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/sources/delay.c.s
 .PHONY : sources/delay.c.s
 
+sources/font.o: sources/font.c.o
+.PHONY : sources/font.o
+
+# target to build an object file
+sources/font.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/blink.dir/build.make CMakeFiles/blink.dir/sources/font.c.o
+.PHONY : sources/font.c.o
+
+sources/font.i: sources/font.c.i
+.PHONY : sources/font.i
+
+# target to preprocess a source file
+sources/font.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/blink.dir/build.make CMakeFiles/blink.dir/sources/font.c.i
+.PHONY : sources/font.c.i
+
+sources/font.s: sources/font.c.s
+.PHONY : sources/font.s
+
+# target to generate assembly for a file
+sources/font.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/blink.dir/build.make CMakeFiles/blink.dir/sources/font.c.s
+.PHONY : sources/font.c.s
+
 sources/linux_i2c.o: sources/linux_i2c.c.o
 .PHONY : sources/linux_i2c.o
 
@@ -440,6 +464,9 @@ help:
 	@echo "... sources/delay.o"
 	@echo "... sources/delay.i"
 	@echo "... sources/delay.s"
+	@echo "... sources/font.o"
+	@echo "... sources/font.i"
+	@echo "... sources/font.s"
 	@echo "... sources/linux_i2c.o"
 	@echo "... sources/linux_i2c.i"
 	@echo "... sources/linux_i2c.s"

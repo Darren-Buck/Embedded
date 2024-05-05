@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/app/sources/blink.c" "CMakeFiles/blink.dir/sources/blink.c.o" "gcc" "CMakeFiles/blink.dir/sources/blink.c.o.d"
   "/app/sources/delay.c" "CMakeFiles/blink.dir/sources/delay.c.o" "gcc" "CMakeFiles/blink.dir/sources/delay.c.o.d"
+  "/app/sources/font.c" "CMakeFiles/blink.dir/sources/font.c.o" "gcc" "CMakeFiles/blink.dir/sources/font.c.o.d"
   "/app/sources/main_blink.c" "CMakeFiles/blink.dir/sources/main_blink.c.o" "gcc" "CMakeFiles/blink.dir/sources/main_blink.c.o.d"
   "/app/sources/morse.c" "CMakeFiles/blink.dir/sources/morse.c.o" "gcc" "CMakeFiles/blink.dir/sources/morse.c.o.d"
   )
