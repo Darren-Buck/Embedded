@@ -36,7 +36,7 @@ endif()
 
 
 # Add executables
-add_executable(subscriber subscriber.c)
+add_executable(subscriber sources/subscriber.c sources/blink.c sources/bmp280_i2c.c sources/delay.c sources/linux_i2c.c sources/morse.c sources/ssd1306.c)
 add_executable(publisher publisher.c)
 
 # Link libraries
