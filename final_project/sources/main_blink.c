@@ -21,4 +21,5 @@ int main_blink(const cJSON *morse) {
     morse_blink_led(morseOutput);
 
     return 0;
+    }
 }

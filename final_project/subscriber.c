@@ -11,8 +11,15 @@
 
 void message_callback(struct mosquitto *mosq, void *userdata, const struct mosquitto_message *message)
 {
+    ssd1306_oled_clear_screen();
+    ssd1306_oled_set_XY(0, 0);
+    char msg1[250] = {0};
+    char msg2[250] = {0};
+
     if (message->payloadlen)
     {
+
+        
         printf("%s %s\n", message->topic, (char *)message->payload);
         cJSON *root = cJSON_Parse(message->payload);
         if (root)
@@ -41,42 +48,35 @@ void message_callback(struct mosquitto *mosq, void *userdata, const struct mosqu
             const cJSON *task = cJSON_GetObjectItemCaseSensitive(root, "task");
             if (cJSON_IsString(task) && (task->valuestring != NULL))
             {
+                struct bmp280_i2c reading = read_temp_pressure();
                 if (strcmp(task->valuestring, "get_temperature") == 0)
                 {
                     // Handle temperature task
-                    float temperature = bmp280_get_temperature();
-                    char temperature_string[20];
-                    snprintf(temperature_string, sizeof(temperature_string), "%.2f C", temperature);
+                    sprintf(msg1, "%.2f C", reading.temperature);
                     ssd1306_oled_write_string(0, "Temperature:");
                     ssd1306_oled_set_XY(0, 2);
-                    ssd1306_oled_write_string(0, temperature_string);
+                    ssd1306_oled_write_string(0, msg1);
                 }
                 else if (strcmp(task->valuestring, "get_pressure") == 0)
                 {
                     // Handle pressure task
-                    float pressure = bmp280_get_pressure();
-                    char pressure_string[20];
-                    snprintf(pressure_string, sizeof(pressure_string), "%.2f Pa", pressure);
+                    sprintf(msg1, "%.2f Pa", reading.pressure);
                     ssd1306_oled_write_string(0, "Pressure:");
                     ssd1306_oled_set_XY(0, 2);
-                    ssd1306_oled_write_string(0, pressure_string);
+                    ssd1306_oled_write_string(0, msg1);
                 }
                 else if (strcmp(task->valuestring, "get_temperature_pressure") == 0)
                 {
-                    // Handle temperature and pressure task
-                    float temperature = bmp280_get_temperature();
-                    float pressure = bmp280_get_pressure();
-                    char temperature_string[20];
-                    char pressure_string[20];
-                    snprintf(temperature_string, sizeof(temperature_string), "Temp: %.2f C", temperature);
-                    snprintf(pressure_string, sizeof(pressure_string), "Press: %.2f Pa", pressure);
+                   
+                    sprintf(msg1, "%.2f C", reading.temperature);
+                    sprintf(msg2, "%.2f Pa", reading.pressure);
                     ssd1306_oled_write_string(0, "Temperature:");
                     ssd1306_oled_set_XY(0, 2);
-                    ssd1306_oled_write_string(0, temperature_string);
+                    ssd1306_oled_write_string(0, msg1);
                     ssd1306_oled_set_XY(0, 4);
                     ssd1306_oled_write_string(0, "Pressure:");
                     ssd1306_oled_set_XY(0, 6);
-                    ssd1306_oled_write_string(0, pressure_string);
+                    ssd1306_oled_write_string(0, msg2);
                 }
                 // Add more task handling as needed
             }
@@ -110,7 +110,7 @@ void message_callback(struct mosquitto *mosq, void *userdata, const struct mosqu
             if (cJSON_IsString(morse) && (morse->valuestring != NULL))
             {
                 // Handle morse code
-                morse_code_blink(morse->valuestring);
+                main_blink(morse->valuestring);
             }
 
 

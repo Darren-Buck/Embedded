@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(final_project)
+project(final_project VERSION 1.0)
 
 include_directories(sources headers)
 
@@ -7,13 +7,12 @@ include_directories(sources headers)
 set(SRCS sources/blink.c sources/bmp280_i2c.c sources/delay.c sources/linux_i2c.c sources/morse.c sources/ssd1306.c )
 
 add_library(ssd1306 STATIC sources/ssd1306.c sources/linux_i2c.c)
-target_link_libraries(final_project ssd130)
+
 
 add_library(bmp280 STATIC sources/bmp280_i2c.c)
-target_link_libraries(final_project bmp280)
+
 
 add_library(blink STATIC sources/blink.c sources/morse.c sources/delay.c sources/main_blink.c)
-target_link_libraries(final_project blink)
 
 
 # Find cJSON library
@@ -54,6 +53,7 @@ endif()
 add_executable(subscriber subscriber.c ${SRCS})
 add_executable(publisher publisher.c)
 
+
 # Link libraries
-target_link_libraries(subscriber ${CJSON_LIB} ${MQTT_LIB} ${OPEN_SSL_LIB} ${CRYPTO_LIB})
+target_link_libraries(subscriber ${CJSON_LIB} ${MQTT_LIB} ${OPEN_SSL_LIB} ${CRYPTO_LIB} blink bmp280 ssd1306)
 target_link_libraries(publisher ${CJSON_LIB} ${MQTT_LIB} ${OPEN_SSL_LIB} ${CRYPTO_LIB})

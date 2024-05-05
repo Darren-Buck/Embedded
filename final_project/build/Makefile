@@ -117,6 +117,45 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named ssd1306
+
+# Build rule for target.
+ssd1306: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ssd1306
+.PHONY : ssd1306
+
+# fast build rule for target.
+ssd1306/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ssd1306.dir/build.make CMakeFiles/ssd1306.dir/build
+.PHONY : ssd1306/fast
+
+#=============================================================================
+# Target rules for targets named bmp280
+
+# Build rule for target.
+bmp280: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 bmp280
+.PHONY : bmp280
+
+# fast build rule for target.
+bmp280/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bmp280.dir/build.make CMakeFiles/bmp280.dir/build
+.PHONY : bmp280/fast
+
+#=============================================================================
+# Target rules for targets named blink
+
+# Build rule for target.
+blink: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 blink
+.PHONY : blink
+
+# fast build rule for target.
+blink/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/blink.dir/build.make CMakeFiles/blink.dir/build
+.PHONY : blink/fast
+
+#=============================================================================
 # Target rules for targets named subscriber
 
 # Build rule for target.
@@ -171,6 +210,7 @@ sources/blink.o: sources/blink.c.o
 
 # target to build an object file
 sources/blink.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/blink.dir/build.make CMakeFiles/blink.dir/sources/blink.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/sources/blink.c.o
 .PHONY : sources/blink.c.o
 
@@ -179,6 +219,7 @@ sources/blink.i: sources/blink.c.i
 
 # target to preprocess a source file
 sources/blink.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/blink.dir/build.make CMakeFiles/blink.dir/sources/blink.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/sources/blink.c.i
 .PHONY : sources/blink.c.i
 
@@ -187,6 +228,7 @@ sources/blink.s: sources/blink.c.s
 
 # target to generate assembly for a file
 sources/blink.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/blink.dir/build.make CMakeFiles/blink.dir/sources/blink.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/sources/blink.c.s
 .PHONY : sources/blink.c.s
 
@@ -195,6 +237,7 @@ sources/bmp280_i2c.o: sources/bmp280_i2c.c.o
 
 # target to build an object file
 sources/bmp280_i2c.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bmp280.dir/build.make CMakeFiles/bmp280.dir/sources/bmp280_i2c.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/sources/bmp280_i2c.c.o
 .PHONY : sources/bmp280_i2c.c.o
 
@@ -203,6 +246,7 @@ sources/bmp280_i2c.i: sources/bmp280_i2c.c.i
 
 # target to preprocess a source file
 sources/bmp280_i2c.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bmp280.dir/build.make CMakeFiles/bmp280.dir/sources/bmp280_i2c.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/sources/bmp280_i2c.c.i
 .PHONY : sources/bmp280_i2c.c.i
 
@@ -211,6 +255,7 @@ sources/bmp280_i2c.s: sources/bmp280_i2c.c.s
 
 # target to generate assembly for a file
 sources/bmp280_i2c.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bmp280.dir/build.make CMakeFiles/bmp280.dir/sources/bmp280_i2c.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/sources/bmp280_i2c.c.s
 .PHONY : sources/bmp280_i2c.c.s
 
@@ -219,6 +264,7 @@ sources/delay.o: sources/delay.c.o
 
 # target to build an object file
 sources/delay.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/blink.dir/build.make CMakeFiles/blink.dir/sources/delay.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/sources/delay.c.o
 .PHONY : sources/delay.c.o
 
@@ -227,6 +273,7 @@ sources/delay.i: sources/delay.c.i
 
 # target to preprocess a source file
 sources/delay.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/blink.dir/build.make CMakeFiles/blink.dir/sources/delay.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/sources/delay.c.i
 .PHONY : sources/delay.c.i
 
@@ -235,6 +282,7 @@ sources/delay.s: sources/delay.c.s
 
 # target to generate assembly for a file
 sources/delay.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/blink.dir/build.make CMakeFiles/blink.dir/sources/delay.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/sources/delay.c.s
 .PHONY : sources/delay.c.s
 
@@ -243,6 +291,7 @@ sources/linux_i2c.o: sources/linux_i2c.c.o
 
 # target to build an object file
 sources/linux_i2c.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ssd1306.dir/build.make CMakeFiles/ssd1306.dir/sources/linux_i2c.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/sources/linux_i2c.c.o
 .PHONY : sources/linux_i2c.c.o
 
@@ -251,6 +300,7 @@ sources/linux_i2c.i: sources/linux_i2c.c.i
 
 # target to preprocess a source file
 sources/linux_i2c.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ssd1306.dir/build.make CMakeFiles/ssd1306.dir/sources/linux_i2c.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/sources/linux_i2c.c.i
 .PHONY : sources/linux_i2c.c.i
 
@@ -259,14 +309,40 @@ sources/linux_i2c.s: sources/linux_i2c.c.s
 
 # target to generate assembly for a file
 sources/linux_i2c.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ssd1306.dir/build.make CMakeFiles/ssd1306.dir/sources/linux_i2c.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/sources/linux_i2c.c.s
 .PHONY : sources/linux_i2c.c.s
+
+sources/main_blink.o: sources/main_blink.c.o
+.PHONY : sources/main_blink.o
+
+# target to build an object file
+sources/main_blink.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/blink.dir/build.make CMakeFiles/blink.dir/sources/main_blink.c.o
+.PHONY : sources/main_blink.c.o
+
+sources/main_blink.i: sources/main_blink.c.i
+.PHONY : sources/main_blink.i
+
+# target to preprocess a source file
+sources/main_blink.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/blink.dir/build.make CMakeFiles/blink.dir/sources/main_blink.c.i
+.PHONY : sources/main_blink.c.i
+
+sources/main_blink.s: sources/main_blink.c.s
+.PHONY : sources/main_blink.s
+
+# target to generate assembly for a file
+sources/main_blink.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/blink.dir/build.make CMakeFiles/blink.dir/sources/main_blink.c.s
+.PHONY : sources/main_blink.c.s
 
 sources/morse.o: sources/morse.c.o
 .PHONY : sources/morse.o
 
 # target to build an object file
 sources/morse.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/blink.dir/build.make CMakeFiles/blink.dir/sources/morse.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/sources/morse.c.o
 .PHONY : sources/morse.c.o
 
@@ -275,6 +351,7 @@ sources/morse.i: sources/morse.c.i
 
 # target to preprocess a source file
 sources/morse.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/blink.dir/build.make CMakeFiles/blink.dir/sources/morse.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/sources/morse.c.i
 .PHONY : sources/morse.c.i
 
@@ -283,6 +360,7 @@ sources/morse.s: sources/morse.c.s
 
 # target to generate assembly for a file
 sources/morse.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/blink.dir/build.make CMakeFiles/blink.dir/sources/morse.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/sources/morse.c.s
 .PHONY : sources/morse.c.s
 
@@ -291,6 +369,7 @@ sources/ssd1306.o: sources/ssd1306.c.o
 
 # target to build an object file
 sources/ssd1306.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ssd1306.dir/build.make CMakeFiles/ssd1306.dir/sources/ssd1306.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/sources/ssd1306.c.o
 .PHONY : sources/ssd1306.c.o
 
@@ -299,6 +378,7 @@ sources/ssd1306.i: sources/ssd1306.c.i
 
 # target to preprocess a source file
 sources/ssd1306.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ssd1306.dir/build.make CMakeFiles/ssd1306.dir/sources/ssd1306.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/sources/ssd1306.c.i
 .PHONY : sources/ssd1306.c.i
 
@@ -307,6 +387,7 @@ sources/ssd1306.s: sources/ssd1306.c.s
 
 # target to generate assembly for a file
 sources/ssd1306.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ssd1306.dir/build.make CMakeFiles/ssd1306.dir/sources/ssd1306.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/sources/ssd1306.c.s
 .PHONY : sources/ssd1306.c.s
 
@@ -342,7 +423,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... blink"
+	@echo "... bmp280"
 	@echo "... publisher"
+	@echo "... ssd1306"
 	@echo "... subscriber"
 	@echo "... publisher.o"
 	@echo "... publisher.i"
@@ -359,6 +443,9 @@ help:
 	@echo "... sources/linux_i2c.o"
 	@echo "... sources/linux_i2c.i"
 	@echo "... sources/linux_i2c.s"
+	@echo "... sources/main_blink.o"
+	@echo "... sources/main_blink.i"
+	@echo "... sources/main_blink.s"
 	@echo "... sources/morse.o"
 	@echo "... sources/morse.i"
 	@echo "... sources/morse.s"

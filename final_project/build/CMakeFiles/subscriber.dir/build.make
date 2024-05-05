@@ -192,6 +192,9 @@ subscriber: ../install_cv1800b_cjson/lib/libcjson.so
 subscriber: ../install_cv1800b_mqtt/lib/libmosquitto.so
 subscriber: ../install_cv1800b_openssl/lib/libssl.so
 subscriber: ../install_cv1800b_openssl/lib/libcrypto.so
+subscriber: libblink.a
+subscriber: libbmp280.a
+subscriber: libssd1306.a
 subscriber: CMakeFiles/subscriber.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking C executable subscriber"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/subscriber.dir/link.txt --verbose=$(VERBOSE)
