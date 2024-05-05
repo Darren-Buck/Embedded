@@ -6,6 +6,16 @@ include_directories(sources headers)
 # Source files here
 set(SRCS sources/blink.c sources/bmp280_i2c.c sources/delay.c sources/linux_i2c.c sources/morse.c sources/ssd1306.c )
 
+add_library(ssd1306 STATIC sources/ssd1306.c sources/linux_i2c.c)
+target_link_libraries(final_project ssd130)
+
+add_library(bmp280 STATIC sources/bmp280_i2c.c)
+target_link_libraries(final_project bmp280)
+
+add_library(blink STATIC sources/blink.c sources/morse.c sources/delay.c sources/main_blink.c)
+target_link_libraries(final_project blink)
+
+
 # Find cJSON library
 find_library(CJSON_LIB
   NAMES cjson

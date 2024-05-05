@@ -2,6 +2,12 @@
 #include <stdlib.h>
 #include <mosquitto.h>
 #include <cjson/cJSON.h>
+#include "main_blink.h"
+#include "font.h"
+#include "bmp280_i2c.h"
+#include "ssd1306.h"
+#include "linux_i2c.h"
+
 
 void message_callback(struct mosquitto *mosq, void *userdata, const struct mosquitto_message *message)
 {
