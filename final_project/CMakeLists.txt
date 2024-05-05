@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
 project(final_project)
 
+include_directories(sources headers)
+
+# Source files here
+set(SRCS sources/blink.c sources/bmp280_i2c.c sources/delay.c sources/linux_i2c.c sources/morse.c sources/ssd1306.c )
+
 # Find cJSON library
 find_library(CJSON_LIB
   NAMES cjson
@@ -36,7 +41,7 @@ endif()
 
 
 # Add executables
-add_executable(subscriber sources/subscriber.c sources/blink.c sources/bmp280_i2c.c sources/delay.c sources/linux_i2c.c sources/morse.c sources/ssd1306.c)
+add_executable(subscriber subscriber.c ${SRCS})
 add_executable(publisher publisher.c)
 
 # Link libraries
