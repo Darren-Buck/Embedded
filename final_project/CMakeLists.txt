@@ -3,15 +3,12 @@ project(final_project VERSION 1.0)
 
 include_directories(sources headers)
 
-# Source files here
+# Source files here for use in exacutable 
 set(SRCS sources/blink.c sources/bmp280_i2c.c sources/delay.c sources/linux_i2c.c sources/morse.c sources/ssd1306.c )
 
+# Adding in the libraries for OLED and bmp functionallity 
 add_library(ssd1306 STATIC sources/ssd1306.c sources/linux_i2c.c)
-
-
 add_library(bmp280 STATIC sources/bmp280_i2c.c)
-
-
 add_library(blink STATIC sources/blink.c sources/morse.c sources/delay.c sources/main_blink.c sources/font.c)
 
 

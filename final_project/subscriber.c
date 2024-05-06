@@ -8,6 +8,9 @@
 #include "ssd1306.h"
 #include "linux_i2c.h"
 
+#define HOST "104.236.198.67" //"localhost"
+#define PORT 1883
+#define TOPIC "test/topic"
 
 void message_callback(struct mosquitto *mosq, void *userdata, const struct mosquitto_message *message)
 {
@@ -110,7 +113,7 @@ void message_callback(struct mosquitto *mosq, void *userdata, const struct mosqu
             if (cJSON_IsString(morse) && (morse->valuestring != NULL))
             {
                 // Handle morse code
-                main_blink(morse->valuestring);
+                main_blink(morse);
             }
 
 
@@ -152,14 +155,14 @@ int main(int argc, char *argv[])
     mosquitto_message_callback_set(mosq, message_callback);
 
     // Connect to an MQTT broker
-    if (mosquitto_connect(mosq, "localhost", 1883, 60) != MOSQ_ERR_SUCCESS)
+    if (mosquitto_connect(mosq, HOST, PORT, 60) != MOSQ_ERR_SUCCESS)
     {
         fprintf(stderr, "Could not connect to broker\n");
         exit(-1);
     }
 
     // Subscribe to the topic
-    mosquitto_subscribe(mosq, NULL, "test/topic", 0);
+    mosquitto_subscribe(mosq, NULL, TOPIC, 0);
 
     // Start the loop
     mosquitto_loop_start(mosq);
