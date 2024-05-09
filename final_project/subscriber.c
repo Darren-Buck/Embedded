@@ -10,7 +10,7 @@
 
 #define HOST "104.236.198.67" //"localhost"
 #define PORT 1883
-#define TOPIC "test/topic"
+#define TOPIC "cpe4953/spring2024/solo5" //"test/topic"
 
 void message_callback(struct mosquitto *mosq, void *userdata, const struct mosquitto_message *message)
 {

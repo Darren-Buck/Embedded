@@ -1,0 +1,38 @@
+Documentation: 
+- 1st Alteration (final_project)
+    -- Included header and source files for ssd1306 OLED library,
+       bmp280 library, morse code library, and mosquetto packages.
+       Putting the sources in a subdirectory labeled sources and
+       doing the same for the headers in their respective subdirectory.
+    -- Adjusted the CMakeLists.txt to include the two subdirectories.
+       Added the libraries to the exicution. 
+- 2nd Alteration (main)
+    -- Initalize both the bmp280, and OLED using their corisponding
+    initalization function calls in their respective libraries.
+    # note: OLED is initalized to GPIO(0) 
+- 3rd Alteration (subscriber.c)
+    -- Make set defined values for HOST, PORT, and TOPIC for ease 
+    of adjustment. So as to not miss any changes for variables in 
+    code.
+- 4td Alterations (message_callback funtion)
+    -- Added cJSON structure for task, with three specific values
+    get_temperature, get_pressure, and get_temperature_pressure. 
+    -- First step is to create an instance of a bmp280 structure
+    called reading that will be filled with the pressure and temp
+    vallues using the bmp280 library call with read_temp_pressure();.
+    -- For specific task calls if statements are used to specify the
+    task by doing a string comparison on the cJSON item. The if 
+    statements then use the needed section of the bmp280 struct to
+    output a value on the OLED using the 
+    ssd1306_oled_write_string(font, msg);. For better clearity and
+    flow, a "title" is printed on the first row of the OLED before
+    printing the value called by the task.
+    # note: on the oled - with every new process the oled is cleared 
+    #       and reset to position 0,0 , also created two string buffs
+    #       for the purpose of holding the values brought from bmp280
+    #       struct. 
+- 5th Alteration (morse_main.c)
+    -- Altered the main function to take in a const cJSON * then
+    pulling the value into a string buffer and passing it through
+    the library. 
+

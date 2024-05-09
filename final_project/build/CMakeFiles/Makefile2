@@ -164,9 +164,9 @@ CMakeFiles/blink.dir/clean:
 # Target rules for target CMakeFiles/subscriber.dir
 
 # All Build rule for target.
+CMakeFiles/subscriber.dir/all: CMakeFiles/ssd1306.dir/all
 CMakeFiles/subscriber.dir/all: CMakeFiles/bmp280.dir/all
 CMakeFiles/subscriber.dir/all: CMakeFiles/blink.dir/all
-CMakeFiles/subscriber.dir/all: CMakeFiles/ssd1306.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/app/build/CMakeFiles --progress-num=14,15,16,17,18,19,20,21 "Built target subscriber"
